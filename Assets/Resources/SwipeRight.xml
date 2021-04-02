@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Gesture Name = "SwipeRight">
+	<Stroke>
+		<Point X = "-2374.34" Y = "-415.7123" T = "0" Pressure = "0" />
+		<Point X = "-1636.964" Y = "-260.0959" T = "0" Pressure = "0" />
+		<Point X = "-1094.481" Y = "-166.5058" T = "0" Pressure = "0" />
+		<Point X = "-628.2567" Y = "-80.06544" T = "0" Pressure = "0" />
+		<Point X = "-256.8692" Y = "-12.43467" T = "0" Pressure = "0" />
+		<Point X = "67.03555" Y = "31.16789" T = "0" Pressure = "0" />
+		<Point X = "298.166" Y = "88.02643" T = "0" Pressure = "0" />
+		<Point X = "555.8748" Y = "116.8563" T = "0" Pressure = "0" />
+		<Point X = "802.2913" Y = "145.8035" T = "0" Pressure = "0" />
+		<Point X = "1041.08" Y = "170.3984" T = "0" Pressure = "0" />
+		<Point X = "1267.895" Y = "196.0135" T = "0" Pressure = "0" />
+		<Point X = "1450.464" Y = "217.9092" T = "0" Pressure = "0" />
+		<Point X = "1686.643" Y = "252.0826" T = "0" Pressure = "0" />
+		<Point X = "1923.611" Y = "288.4891" T = "0" Pressure = "0" />
+		<Point X = "2158.292" Y = "319.3391" T = "0" Pressure = "0" />
+		<Point X = "2386.591" Y = "334.6252" T = "0" Pressure = "0" />
+		<Point X = "2628.572" Y = "338.9101" T = "0" Pressure = "0" />
+	</Stroke>
+</Gesture>
