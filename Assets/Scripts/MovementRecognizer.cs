@@ -9,8 +9,8 @@ using UnityEngine.Events;
 public class MovementRecognizer : MonoBehaviour
 {
     public XRNode inputSource;
-    //public InputHelpers.Button inputButton;
-    public VRInputProcessor inputProcessor;
+    public InputHelpers.Button inputButton;
+    //public VRInputProcessor inputProcessor;
 
     public float inputThreshold = 0.1f;
     public Transform movementSource;
@@ -30,8 +30,7 @@ public class MovementRecognizer : MonoBehaviour
     public GameObject UIObject;
 
     private List<Gesture> trainingSet = new List<Gesture>();
-    private bool isMoving = false;
-    private float isPressed = 0;
+    private bool isMoving = false, isPressed = false;
     private List<Vector3> positionsList = new List<Vector3>();
 
     // Start is called before the first frame update
@@ -41,7 +40,7 @@ public class MovementRecognizer : MonoBehaviour
         //string[] gestureFiles = Directory.GetFiles(Application.persistentDataPath, "*.xml");
 
         //creation mode off
-        string[] gestureFiles = Directory.GetFiles(Application.dataPath + "/Resources/", "*.xml");
+        string[] gestureFiles = Directory.GetFiles(Application.dataPath + "/StreamingAssets/", "*.xml");
         foreach (var item in gestureFiles)
         {
             trainingSet.Add(GestureIO.ReadGestureFromFile(item));
@@ -51,20 +50,21 @@ public class MovementRecognizer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isPressed = inputProcessor.rightHandTrigger;
-        //InputHelpers.IsPressed(InputDevices.GetDeviceAtXRNode(inputSource), inputButton, out bool isPressed, inputThreshold);
+        //isPressed = inputProcessor.rightHandTrigger;
+        InputHelpers.IsPressed(InputDevices.GetDeviceAtXRNode(inputSource), inputButton, out bool isPressed, inputThreshold);
+        
 
         //start the movement
-        if(!isMoving && isPressed >= 0.5f)
+        if(!isMoving && isPressed)
         {
             StartMovement();
         }
         //ending the movement
-        else if (isMoving && isPressed < 0.5f){
+        else if (isMoving && !isPressed){
             EndMovement();
         }
         //updating the movement
-        else if (isMoving && isPressed > 0.5f)
+        else if (isMoving && isPressed)
         {
             UpdateMovement();
         }
@@ -128,10 +128,13 @@ public class MovementRecognizer : MonoBehaviour
     {
         Vector3 lastPosition = positionsList[positionsList.Count - 1];
         if (Vector3.Distance(movementSource.position, lastPosition) > newPositionThresholdDistance)
+        {
             positionsList.Add(movementSource.position);
 
-        if (debugCubePrefab)
-            Destroy(Instantiate(debugCubePrefab, movementSource.position, Quaternion.identity), 3);
+            if (debugCubePrefab)
+                Destroy(Instantiate(debugCubePrefab, movementSource.position, Quaternion.identity), 3);
+        }
+            
     }
 
     //check the direction of swipe gesture

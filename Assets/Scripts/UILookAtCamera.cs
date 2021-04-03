@@ -7,8 +7,7 @@ public class UILookAtCamera : MonoBehaviour
     public Transform target;
     public float smoothSpeed = 10;
     public float maxDistance = .5f;
-
-    public VRInputProcessor inputProcessor;
+    
 
     [Space(10)]
     public bool tutorial;
