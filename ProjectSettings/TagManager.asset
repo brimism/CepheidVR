@@ -3,7 +3,23 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Button
+  - tableCartridge
+  - Cartridge
+  - Swab
+  - Trash
+  - Nostril
+  - Pressure
+  - Door
+  - CartridgeCap
+  - GeneXScan
+  - Cap
+  - Vacuum
+  - Gloves
+  - GenexDoor
+  - Tube
+  - Pipette
   layers:
   - Default
   - TransparentFX
@@ -13,7 +29,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - terrain
   - 
   - 
   - 
