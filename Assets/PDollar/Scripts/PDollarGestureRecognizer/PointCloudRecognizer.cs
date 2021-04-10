@@ -145,6 +145,8 @@ namespace PDollarGestureRecognizer
                             index = j;
                         }
                     }
+                if (index == -1)
+                    break;
                 matched[index] = true; // point index from the 2nd cloud is matched to point i from the 1st cloud
                 
                 float weight = 1.0f - ((i - startIndex + n) % n) / (1.0f * n);

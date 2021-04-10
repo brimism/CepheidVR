@@ -68,6 +68,8 @@ namespace PDollarGestureRecognizer
         /// </summary>
         public static float SqrEuclideanDistance(Point a, Point b)
         {
+            if (a == null || b == null)
+                return 100;
             return (a.X - b.X) * (a.X - b.X) + (a.Y - b.Y) * (a.Y - b.Y);
         }
 

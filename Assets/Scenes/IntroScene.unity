@@ -2507,7 +2507,7 @@ MonoBehaviour:
     type: 3}
   creationMode: 0
   newGestureName: 
-  recognitionThreshold: 0.9
+  recognitionThreshold: 0.2
   OnRecognized:
     m_PersistentCalls:
       m_Calls: []

@@ -141,15 +141,19 @@ public class MovementRecognizer : MonoBehaviour
     void MatchSwipeGesture(Gesture g)
     {
         Point[] gesturePoints = g.Points;
+        if (gesturePoints[gesturePoints.Length - 1] == null)
+            return;
 
         // right
         if (gesturePoints[gesturePoints.Length-1].X > 0)
         {
             UIObject.GetComponent<UILookAtCamera>().MoveRight();
+            Debug.Log("move right");
         }
         else
         {
             UIObject.GetComponent<UILookAtCamera>().MoveLeft();
+            Debug.Log("move left");
         }
     }
 }
