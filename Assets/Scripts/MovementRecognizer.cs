@@ -110,7 +110,7 @@ public class MovementRecognizer : MonoBehaviour
         {
             Result result = PointCloudRecognizer.Classify(newGesture, trainingSet.ToArray());
             //Result result = PointCloudRecognizer.Classify(newGesture, realSet);
-            Debug.Log(result.GestureClass + result.Score);
+            //Debug.Log(result.GestureClass + result.Score);
             
             if(result.Score > recognitionThreshold)
             {
@@ -145,7 +145,7 @@ public class MovementRecognizer : MonoBehaviour
             return;
 
         // right
-        if (gesturePoints[gesturePoints.Length-1].X > 0)
+        if (gesturePoints[gesturePoints.Length-1].X > gesturePoints[0].X)
         {
             UIObject.GetComponent<UILookAtCamera>().MoveRight();
             Debug.Log("move right");
