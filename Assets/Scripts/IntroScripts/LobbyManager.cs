@@ -24,6 +24,7 @@ public class LobbyManager : MonoBehaviour
     public GameObject rightHand, clipboard;
     public TextMeshProUGUI ui;
     public GameObject confirmButton;
+    public Animator blackPanel;
     
     
     private Steps currentStep;
@@ -72,10 +73,14 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    public void nextRoom()
+    public IEnumerator nextRoom()
     {
         if (currentStep == Steps.nextRoom)
-            SceneManager.LoadScene(2);
+        {
+            blackPanel.SetTrigger("FadeOut");
+            yield return new WaitForSeconds(1.1f);
+            SceneManager.LoadScene("SampleRoom");
+        }
     }
 
     private void TimeUp()

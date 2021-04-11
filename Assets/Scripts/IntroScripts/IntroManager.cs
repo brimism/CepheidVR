@@ -49,6 +49,7 @@ public class IntroManager : MonoBehaviour
     public GameObject assistUI;
     public GameObject testObj, placeholder;
     public GameObject confirmButton;
+    public Animator blackPanel;
 
     private int stepIndex = 0;
 
@@ -174,10 +175,12 @@ public class IntroManager : MonoBehaviour
         }
     }
 
-    public void nextRoom()
+    public IEnumerator nextRoom()
     {
         if (currentStep == Steps.nextRoom)
         {
+            blackPanel.SetTrigger("FadeOut");
+            yield return new WaitForSeconds(1.1f);
             SceneManager.LoadScene("Lobby");
         }
     }
