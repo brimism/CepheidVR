@@ -153,7 +153,7 @@ public class StateMachine : MonoBehaviour
     public GameObject tableCap;//fake test tube cap on the table fo rwhen the player "opens" the test tube to take the sample
 
     [Header("PCElements")]
-    public PlayerController pc;//player controller
+    public GameObject pc;//player controller
     public GameObject rightHand;//player's right hand transform
     public GameObject leftHand;//player's left hand transform
     public GameObject rightHandModel;//player's visible right hand
@@ -243,7 +243,7 @@ public class StateMachine : MonoBehaviour
         foreach (Outline o in outlines)
             o.enabled = false;
 
-        pc.GetComponent<CharacterController>().enabled = true;
+        //pc.GetComponent<CharacterController>().enabled = true;
         tubeInverts = 0;
         fingerPoint = false;
 
@@ -382,7 +382,7 @@ public class StateMachine : MonoBehaviour
                 rightHand.transform.position = leftSwabTransform.position;
                 rightHand.transform.eulerAngles = new Vector3(leftSwabTransform.rotation.x, rightHand.transform.eulerAngles.y, leftSwabTransform.rotation.z);
 
-                pc.GetComponent<PlayerController>().SendHaptics(false, 0.75f, .1f);
+                //pc.GetComponent<PlayerController>().SendHaptics(false, 0.75f, .1f);
 
                 leftPressure.GetComponent<Outline>().enabled = false;
                 leftPressure.GetComponent<MeshRenderer>().enabled = false;
@@ -457,7 +457,7 @@ public class StateMachine : MonoBehaviour
                 rightPressure.GetComponent<Outline>().enabled = false;
                 rightPressure.GetComponent<MeshRenderer>().enabled = false;
 
-                pc.GetComponent<PlayerController>().SendHaptics(true, 0.75f, .1f);
+                //pc.GetComponent<PlayerController>().SendHaptics(true, 0.75f, .1f);
 
                 break;
             case Steps.pickupTube://player has successfully gathered the sample, must pick up the test tube
@@ -659,8 +659,8 @@ public class StateMachine : MonoBehaviour
 
                 glass = testTube.GetComponent<MeshRenderer>().material;
                 leftHand.GetComponent<Collider>().enabled = false;
-                ghostTube.transform.rotation = Quaternion.Euler(0, 0, 0);
-                ghostTube.transform.localScale = new Vector3(1f, -1f, 1f);
+                ghostTube.transform.rotation = Quaternion.Euler(0, 0, 180);
+                ghostTube.transform.localScale = new Vector3(0.15f,0.15f,0.15f);
                 outlines = ghostTube.GetComponentsInChildren<Outline>();
                 foreach (Outline o in outlines)
                     o.enabled = true;
@@ -677,7 +677,7 @@ public class StateMachine : MonoBehaviour
                 checkRotation(1);
                 break;
             case Steps.invertTube2:
-                ghostTube.transform.localScale = new Vector3(1f, 1f, 1f);
+                ghostTube.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
                 ghostTube.transform.rotation = Quaternion.Euler(0, 0, 0);
 
                 testText.text = instructions[24];
@@ -1098,7 +1098,7 @@ public class StateMachine : MonoBehaviour
             GameObject swabParent = swabBottom.transform.parent.gameObject;
             swabParent.transform.parent = rightHand.transform;
             swabParent.transform.position = rightHand.transform.position;
-            swabParent.transform.localPosition += new Vector3(0.0f, 0.7f, 0f);
+            swabParent.transform.localPosition += new Vector3(0.0f, 0.07f, 0f);
             swabParent.transform.rotation = rightHand.transform.rotation * Quaternion.Euler(15, 0, 180);
             //swab.transform.parent = rightHand.transform;
             //swab.transform.position = rightHand.transform.position;
@@ -1116,7 +1116,7 @@ public class StateMachine : MonoBehaviour
             GameObject swabParent = swabBottom.transform.parent.gameObject;
             swabParent.transform.parent = leftHand.transform;
             swabParent.transform.position = leftHand.transform.position;
-            swabParent.transform.localPosition += new Vector3(0.0f, 0.7f, 0f);
+            swabParent.transform.localPosition += new Vector3(0.0f, 0.07f, 0f);
             swabParent.transform.rotation = leftHand.transform.rotation * Quaternion.Euler(15, 0, 180);
 
             //swab.transform.parent = leftHand.transform;
@@ -1185,7 +1185,7 @@ public class StateMachine : MonoBehaviour
             testTube.transform.position = rightHand.transform.position;
             testTube.transform.rotation = rightHand.transform.rotation;
             testTube.transform.parent = rightHand.transform;
-            testTube.transform.localPosition += new Vector3(0f, 0.4f, 0f);
+            testTube.transform.localPosition += new Vector3(0f, 0.07f, 0f);
 
             rightHandModel.GetComponent<MeshFilter>().mesh = closedHand;
 
@@ -1200,7 +1200,7 @@ public class StateMachine : MonoBehaviour
             testTube.transform.position = leftHand.transform.position;
             testTube.transform.rotation = leftHand.transform.rotation;
             testTube.transform.parent = leftHand.transform;
-            testTube.transform.localPosition += new Vector3(0f, 0.4f, 0f);
+            testTube.transform.localPosition += new Vector3(0f, 0.07f, 0f);
 
             leftHandModel.GetComponent<MeshFilter>().mesh = closedHand;
             rightHandModel.GetComponent<MeshFilter>().mesh = defaultHand;
@@ -1217,7 +1217,7 @@ public class StateMachine : MonoBehaviour
                 testTube.transform.position = leftHand.transform.position;
                 testTube.transform.rotation = leftHand.transform.rotation;
                 testTube.transform.parent = leftHand.transform;
-                testTube.transform.localPosition += new Vector3(0f, 0.4f, 0f);
+                testTube.transform.localPosition += new Vector3(0f, 0.07f, 0f);
 
                 leftHandModel.GetComponent<MeshFilter>().mesh = closedHand;
                 if (fingerPoint)
@@ -1230,7 +1230,7 @@ public class StateMachine : MonoBehaviour
                 testTube.transform.position = rightHand.transform.position;
                 testTube.transform.rotation = rightHand.transform.rotation;
                 testTube.transform.parent = rightHand.transform;
-                testTube.transform.localPosition += new Vector3(0f, 0.4f, 0f);
+                testTube.transform.localPosition += new Vector3(0f, 0.07f, 0f);
                 //testTube.transform.rotation = Quaternion.Euler(0, 0, 0);
 
                 rightHandModel.GetComponent<MeshFilter>().mesh = closedHand;
@@ -1644,7 +1644,6 @@ public class StateMachine : MonoBehaviour
         //doorKnob.GetComponent<Outline>().enabled = false;
         panel.CrossFadeAlpha(1.0f, 2.5f, true); //fade canvas to black
         yield return new WaitForSeconds(2.5f);//delay
-        //pc.transform.position = new Vector3(-22f, 2.92f, 13f);//teleport
         pc.transform.SetPositionAndRotation(testRoomTransform.position, testRoomTransform.rotation);
         yield return new WaitForSeconds(1.5f);//delay
         panel.CrossFadeAlpha(0.0f, 2.5f, true);//fade in view
