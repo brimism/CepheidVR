@@ -20,6 +20,8 @@ TagManager:
   - GenexDoor
   - Tube
   - Pipette
+  - TestPlaceholder
+  - TestObject
   layers:
   - Default
   - TransparentFX
@@ -30,7 +32,7 @@ TagManager:
   - 
   - 
   - terrain
-  - 
+  - Post Processing
   - 
   - 
   - 

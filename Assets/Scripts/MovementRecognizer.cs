@@ -52,7 +52,8 @@ public class MovementRecognizer : MonoBehaviour
     {
         //isPressed = inputProcessor.rightHandTrigger;
         InputHelpers.IsPressed(InputDevices.GetDeviceAtXRNode(inputSource), inputButton, out bool isPressed, inputThreshold);
-        
+
+        Debug.Log(isPressed);
 
         //start the movement
         if(!isMoving && isPressed)
