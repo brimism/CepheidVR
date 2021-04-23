@@ -59,6 +59,7 @@ public class Interaction : MonoBehaviour
         }
         else if (other.tag == "Trash")
         {
+            //Debug.LogWarning("hands collided");
             if (gloved == true)
             {
                 handMesh.material = hand;
@@ -70,7 +71,7 @@ public class Interaction : MonoBehaviour
         else if (other.tag == "Door")
         {
             //Debug.Log("poke door");
-            this.gameObject.SendMessageUpwards("openDoor");
+            //this.gameObject.SendMessageUpwards("openDoor");
             this.gameObject.SendMessageUpwards("FadeOut");
         }
         else if (other.tag == "CartridgeCap")

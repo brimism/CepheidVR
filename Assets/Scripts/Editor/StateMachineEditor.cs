@@ -83,10 +83,8 @@ public class StateMachineEditor : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("swabPack"));
         //EditorGUILayout.PropertyField(serializedObject.FindProperty("openVacuumPack"));
 
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("swab"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("swabTop"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("swabBottom"));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("brokenSwab"));
 
         EditorGUILayout.PropertyField(serializedObject.FindProperty("leftNostril"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("rightNostril"));
@@ -199,10 +197,8 @@ public class StateMachineEditor : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("swabPack"));
         //EditorGUILayout.PropertyField(serializedObject.FindProperty("openVacuumPack"));
 
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("swab"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("swabTop"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("swabBottom"));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("brokenSwab"));
 
         EditorGUILayout.PropertyField(serializedObject.FindProperty("leftNostril"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("rightNostril"));

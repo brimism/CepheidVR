@@ -30,7 +30,7 @@ public class tubeInteract : MonoBehaviour
         else if (other.tag == "Trash")
         {
             SendMessageUpwards("disposeTube");
-            //Destroy(this.gameObject, 0.2f);
+
         }
         else if (other.tag == "GeneXScan")
         {

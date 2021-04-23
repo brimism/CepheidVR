@@ -114,10 +114,8 @@ public class StateMachine : MonoBehaviour
     public GameObject vacuumPack;//pack carrying the test tube and swab
 
     public GameObject swabPack;//individual wrapper on the swab
-    public GameObject swab;//swab object
     public GameObject swabTop;
     public GameObject swabBottom;
-    public Mesh brokenSwab;//broken swab
 
     public GameObject leftNostril;//"left" nostril (player's left, not the patient's actual left nostril)
     public GameObject rightNostril;//likewise "right" nostril
@@ -1646,9 +1644,10 @@ public class StateMachine : MonoBehaviour
         yield return new WaitForSeconds(2.5f);//delay
         pc.transform.SetPositionAndRotation(testRoomTransform.position, testRoomTransform.rotation);
         yield return new WaitForSeconds(1.5f);//delay
-        panel.CrossFadeAlpha(0.0f, 2.5f, true);//fade in view
-        instructionSource.Stop();
-        instructionSource.PlayOneShot(instructionAudio[16]);
+
+        //panel.CrossFadeAlpha(0.0f, 2.5f, true);//fade in view
+        //instructionSource.Stop();
+        //instructionSource.PlayOneShot(instructionAudio[16]);
         //current = Steps.labGloves;//"please put on gloves" (again)
         //}
     }
