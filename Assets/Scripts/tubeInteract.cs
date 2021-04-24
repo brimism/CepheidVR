@@ -20,19 +20,19 @@ public class tubeInteract : MonoBehaviour
         //lineRenderer.SetPosition(0, transform.position);
         //lineRenderer.SetPosition(1, transform.forward * 20 + transform.position);
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.tag == "Cap")
+        if (other.gameObject.tag == "Cap")
         {
             //Debug.Log("cap trigger");
             this.gameObject.SendMessageUpwards("closeTube");
         }
-        else if (other.tag == "Trash")
+        else if (other.gameObject.tag == "Trash")
         {
             SendMessageUpwards("disposeTube");
 
         }
-        else if (other.tag == "GeneXScan")
+        else if (other.gameObject.tag == "GeneXScan")
         {
             float angle = Vector3.Angle(other.transform.forward, barcode.transform.forward);
             Debug.Log(angle);
