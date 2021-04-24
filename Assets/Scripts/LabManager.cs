@@ -270,13 +270,15 @@ public class LabManager : MonoBehaviour
 
                 rightHand.GetComponent<SphereCollider>().enabled = true;
                 leftHand.GetComponent<Collider>().enabled = true;
-                testTube.GetComponent<Collider>().enabled = true;
+                testTube.GetComponent<CapsuleCollider>().enabled = true;
                 break;
 
             case Steps.startNewTest:
                 headerText.text = headers[1];
                 break;
             case Steps.scanTube:
+                testTube.GetComponent<BoxCollider>().enabled = true;
+                testTube.GetComponent<BoxCollider>().isTrigger = false;
 
                 cartridgeScan.GetComponent<Collider>().enabled = true;
                 cartridgeScan.GetComponent<Outline>().enabled = true;
@@ -447,11 +449,15 @@ public class LabManager : MonoBehaviour
                 testTrash.GetComponent<Collider>().enabled = true;
                 testTrash.GetComponent<Outline>().enabled = true;
 
+                testTrashLid.transform.localRotation = Quaternion.Euler(-90f, 0f, 0f);
+
                 testText.text = instructions[28];
                 break;
             case Steps.closeCartridge:
                 testTrash.GetComponent<Collider>().enabled = false;
                 testTrash.GetComponent<Outline>().enabled = false;
+
+                testTrashLid.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
 
                 rightHand.GetComponent<Collider>().enabled = true;
                 rightHandModel.GetComponent<MeshFilter>().mesh = defaultHand;
@@ -492,11 +498,15 @@ public class LabManager : MonoBehaviour
                 testTrash.GetComponent<Collider>().enabled = true;
                 testTrash.GetComponent<Outline>().enabled = true;
 
+                testTrashLid.transform.localRotation = Quaternion.Euler(-90f, 0f, 0f);
+
                 testText.text = instructions[31];
                 break;
             case Steps.openGeneXpert:
                 testTrash.GetComponent<Collider>().enabled = false;
                 testTrash.GetComponent<Outline>().enabled = false;
+
+                testTrashLid.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
 
                 rightHand.GetComponent<BoxCollider>().enabled = true;
                 rightHand.GetComponent<SphereCollider>().enabled = false;

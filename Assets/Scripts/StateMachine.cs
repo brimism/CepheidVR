@@ -569,7 +569,7 @@ public class StateMachine : MonoBehaviour
 
                 rightHand.GetComponent<SphereCollider>().enabled = true;
                 leftHand.GetComponent<Collider>().enabled = true;
-                testTube.GetComponent<Collider>().enabled = true;
+                testTube.GetComponent<CapsuleCollider>().enabled = true;
                 break;
 
             case Steps.startNewTest:
