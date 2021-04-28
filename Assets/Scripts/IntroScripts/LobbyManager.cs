@@ -79,7 +79,7 @@ public class LobbyManager : MonoBehaviour
         {
             blackPanel.SetTrigger("FadeOut");
             yield return new WaitForSeconds(1.1f);
-            SceneManager.LoadScene("SampleRoom");
+            SceneManager.LoadScene("Rig_NewSampleRoom");
         }
     }
 

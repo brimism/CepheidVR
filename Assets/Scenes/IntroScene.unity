@@ -1137,7 +1137,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &240445510
 GameObject:
@@ -1342,8 +1342,8 @@ Transform:
   m_LocalPosition: {x: -7.177, y: 0.988, z: 11.115}
   m_LocalScale: {x: 0.106604904, y: 0.106604904, z: 0.106604904}
   m_Children: []
-  m_Father: {fileID: 1319711749}
-  m_RootOrder: 6
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &352619920
 BoxCollider:
@@ -1919,7 +1919,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &659355560
 GameObject:
@@ -2659,9 +2659,8 @@ Transform:
   - {fileID: 659355561}
   - {fileID: 765051217}
   - {fileID: 1996714503}
-  - {fileID: 352619919}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1342598135
 GameObject:
@@ -2817,7 +2816,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: b332805cf1e5bb54484a9e65b90d16bc,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b332805cf1e5bb54484a9e65b90d16bc,
         type: 3}
@@ -2995,8 +2994,7 @@ MonoBehaviour:
   inputThreshold: 0.1
   movementSource: {fileID: 2101635115}
   newPositionThresholdDistance: 0.05
-  debugCubePrefab: {fileID: 6825661502984248483, guid: b64fa5cd8f4ce3e43bec1638f5178959,
-    type: 3}
+  debugCubePrefab: {fileID: 0}
   creationMode: 0
   newGestureName: 
   recognitionThreshold: 0.2
@@ -3016,7 +3014,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1365521488
 GameObject:
@@ -4335,6 +4333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e5e8af619b411429e754dc0084a5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneSO: {fileID: 11400000, guid: c68a707e308375649a68b33137bc942f, type: 2}
   currentStep: 0
   tutorialText: {fileID: 113834084}
   assistText: {fileID: 145961489}
@@ -5199,7 +5198,7 @@ PrefabInstance:
     - target: {fileID: 5770307557734853858, guid: 2c248a263b5f9734bb1fd8f3089d790b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5770307557734853858, guid: 2c248a263b5f9734bb1fd8f3089d790b,
         type: 3}

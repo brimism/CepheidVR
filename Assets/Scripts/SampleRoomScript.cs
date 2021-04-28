@@ -21,9 +21,16 @@ public class SampleRoomScript : MonoBehaviour
         insertSwabRight, applyPressureRight, rotateSwabRight, //second nostril
         pickupTube, breakSwab, disposeSwab, pickUpTubeCap, closeTube, //depositing the sample
         disposeGloves, door, //move to lab
+
+        //for returning to this room
+        readResults, giveResults,
+        end
     };
     [Header("State")]
     public Steps current;//keeps track of the current step in the switch statement
+
+    [Header("SceneManager")]
+    public SceneScriptableObj sceneOS;
 
     [Header("NonDiegeticUI")]
 
@@ -53,6 +60,10 @@ public class SampleRoomScript : MonoBehaviour
         "Replace the cap on the tube and close tightly.",//13
         "Please remove your gloves.",//14
         "Bring your sample to the lab.",//15
+
+        "Take a moment to read the patient's results.",//16
+        "Give the perscription to the patient.",//17
+        "End training experience?"//18
     };
     
     public AudioSource instructionSource;//audio source that plays instruction audio
@@ -65,6 +76,10 @@ public class SampleRoomScript : MonoBehaviour
         insertSwabRight, applyPressureRight, rotateSwabRight, //second nostril
         pickupTube, breakSwab, disposeSwab, pickUpTubeCap, closeTube, //depositing the sample
         disposeGloves, door, //move to lab
+        
+        //for giving results
+        readResults, giveResults,
+        end
     }
 
     public instructionText currentInstruction;
@@ -89,6 +104,8 @@ public class SampleRoomScript : MonoBehaviour
 
     public GameObject trashCan;//trash can in sample room
     public GameObject trashCanLid;//lid of the trash can
+    public GameObject giveToPatientCollider;//radius surrounding patient to give Rx
+    public GameObject testResults;
 
     [Header("PCElements")]
     public GameObject pc;//player controller
@@ -139,8 +156,6 @@ public class SampleRoomScript : MonoBehaviour
     //which triggers the methods below that update the states
     void Start()
     {
-        current = Steps.start; //assign current step to first
-        currentInstruction = instructionText.start;
         pc.transform.position = sampleRoomTransform.position;
         pc.transform.rotation = sampleRoomTransform.rotation;
         gloved = 0;
@@ -158,7 +173,26 @@ public class SampleRoomScript : MonoBehaviour
         foreach (Outline o in outlines)
             o.enabled = false;
 
-        instructionSource.PlayDelayed(1.5f);
+        //check what state the room is going to be in
+        switch (sceneOS.examRoomState)
+        {
+
+            //swab patient
+            case 0:
+                current = Steps.start; //assign current step to first
+                currentInstruction = instructionText.start;
+                instructionSource.PlayDelayed(1.5f);
+                break;
+
+            //give results
+            case 1:
+                current = Steps.readResults;
+                currentInstruction = instructionText.readResults;
+                testResults.SetActive(true);
+                //enable clipboard, Rx, etc
+                break;
+        }
+        
     }
 
     // Update is called once per frame
@@ -180,6 +214,10 @@ public class SampleRoomScript : MonoBehaviour
 
                 leftHand.GetComponent<Collider>().enabled = true;
                 rightHand.GetComponent<Collider>().enabled = true;
+
+
+                tableText.text = instructions[0];
+                patientText.text = instructions[0];
 
                 break;
             case Steps.openPack://User has put on gloves, player must open the vacuum pack to move to next step
@@ -437,6 +475,25 @@ public class SampleRoomScript : MonoBehaviour
                 patientText.text = instructions[15];
                 tableText.text = instructions[15];
                 break;
+
+            case Steps.readResults:
+                leftHand.GetComponent<Collider>().enabled = true;
+                rightHand.GetComponent<Collider>().enabled = true;
+                patientText.text = instructions[16];
+                tableText.text = instructions[16];
+                StartCoroutine(WaitToRead());
+                break;
+            case Steps.giveResults:
+                //activate collider to give patient stuff, then switch to end
+                giveToPatientCollider.GetComponent<Collider>().enabled = true;
+                patientText.text = instructions[17];
+                tableText.text = instructions[17];
+                break;
+            case Steps.end:
+                patientText.text = instructions[18];
+                tableText.text = instructions[18];
+                break;
+
             default:
                 //Debug.Log("NOTHING");
                 break;
@@ -707,6 +764,16 @@ public class SampleRoomScript : MonoBehaviour
 
     }
 
+    public void giveResults()
+    {
+        if (current == Steps.giveResults)
+        {
+            testResults.SetActive(false);
+            confirmButton.SetActive(true);
+            current = Steps.end;
+        }
+    }
+
     IEnumerator FadeOut()
     {
         Debug.Log("Coroutine Started");
@@ -718,7 +785,11 @@ public class SampleRoomScript : MonoBehaviour
         //pc.transform.SetPositionAndRotation(testRoomTransform.position, testRoomTransform.rotation);
         yield return new WaitForSeconds(1.5f);//delay
         panel.CrossFadeAlpha(0.0f, 2.5f, true);//fade in view
-        SceneManager.LoadScene(3);
+
+        if (sceneOS.examRoomState == 0)
+            SceneManager.LoadScene(3);
+        else if (sceneOS.examRoomState == 1)
+            SceneManager.LoadScene("IntroScene");
         //instructionSource.Stop();
         //instructionSource.PlayOneShot(instructionAudio[16]);
         //current = Steps.labGloves;//"please put on gloves" (again)
@@ -731,4 +802,12 @@ public class SampleRoomScript : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         Debug.Log("Cutscene Ended");
 ;    }
+    
+
+
+    IEnumerator WaitToRead()
+    {
+        yield return new WaitForSeconds(3f);
+        current = Steps.giveResults;
+    }
 }

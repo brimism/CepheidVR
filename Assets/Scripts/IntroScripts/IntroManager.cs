@@ -42,6 +42,8 @@ public class IntroManager : MonoBehaviour
         "Continue to simulation?"
     };
 
+    public SceneScriptableObj sceneSO;
+
     public Steps currentStep;
 
     public TextMeshProUGUI tutorialText, assistText;
@@ -65,6 +67,8 @@ public class IntroManager : MonoBehaviour
         tutorialText.text = tutorial[1];
         yield return new WaitForSeconds(4);
         currentStep = Steps.lookAtUI;
+
+        sceneSO.ResetAll();
     }
 
     private void Update()

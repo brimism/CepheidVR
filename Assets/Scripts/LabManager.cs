@@ -23,10 +23,14 @@ public class LabManager : MonoBehaviour
         invertTube1, invertTube2, openCartridge, openTube, pickUpPipette, collectSample, depositSample,//preparing the sample for placement in the cartridge
         disposePipette, closeCartridge, pickUpCap2, closeTube2, disposeTube,//preparing the cartridge
         pickUpCartridge2, openGeneXpert, insertCartridge, closeGeneXpert,//starting the test
-        startTest, openGeneXpert2, pickUpCartridge3, disposeCartridge, closeGeneXpert2, openResults, chooseResult,leaveRoom
+        startTest, openGeneXpert2, pickUpCartridge3, disposeCartridge, closeGeneXpert2, openResults, chooseResult,
+        door, leaveRoom
     };
     [Header("State")]
     public Steps current;//keeps track of the current step in the switch statement
+
+    [Header("Scene Manager Scriptable Object")]
+    public SceneScriptableObj sceneSO;
 
     [Header("NonDiegeticUI")]
 
@@ -80,7 +84,8 @@ public class LabManager : MonoBehaviour
         "Remove the cartridge from the GeneXpert",//35
         "Dispose the cartrdige.",//36
         "Close the GeneXpert door.",//37
-        "View the test results."//38
+        "View the test results.",//38
+        "Return to exam room?"//39
     };
 
     public AudioSource instructionSource;//audio source that plays instruction audio
@@ -625,6 +630,10 @@ public class LabManager : MonoBehaviour
 
                 testText.text = instructions[38];
                 break;
+            case Steps.door:
+                confirmButton.SetActive(true);
+                testText.text = instructions[39];
+                break;
             default:
                 //Debug.Log("NOTHING");
                 break;
@@ -838,19 +847,19 @@ public class LabManager : MonoBehaviour
 
     public void openDoor()
     {
-        if (current == Steps.leaveRoom)
+        if (current == Steps.door)
         {
             Debug.Log("open door");
             //doorKnob.GetComponent<Outline>().enabled = false;
             confirmButton.SetActive(false);
-            current = Steps.labGloves;
+            current = Steps.leaveRoom;
             for (int i = 1; i < screens.Length; i++)
             {
                 screens[i].SetActive(false);
             }
             headerText.text = headers[0];
             screens[0].SetActive(true);
-            //FadeOut();
+            StartCoroutine(FadeOut());
         }
     }
 
@@ -1124,8 +1133,16 @@ public class LabManager : MonoBehaviour
         Debug.Log("Coroutine Started");
         panel.CrossFadeAlpha(1.0f, 2.5f, true); //fade canvas to black
         yield return new WaitForSeconds(2.5f);//delay
-        pc.transform.SetPositionAndRotation(testRoomTransform.position, testRoomTransform.rotation);
+        sceneSO.examRoomState++;
+        SceneManager.LoadScene("Rig_NewSampleRoom");
+        //pc.transform.SetPositionAndRotation(testRoomTransform.position, testRoomTransform.rotation);
         yield return new WaitForSeconds(1.5f);//delay
 
+    }
+
+    IEnumerator WaitToRead()
+    {
+        yield return new WaitForSeconds(3f);
+        current = Steps.door ;
     }
 }

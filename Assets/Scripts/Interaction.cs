@@ -111,5 +111,10 @@ public class Interaction : MonoBehaviour
         {
             this.SendMessageUpwards("pickUpChart");
         }
+        else if (other.tag == "Patient")
+        {
+            Debug.Log("Patient");
+            this.SendMessageUpwards("giveResults");
+        }
     }
 }
