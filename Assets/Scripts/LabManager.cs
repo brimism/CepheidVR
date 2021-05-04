@@ -309,6 +309,8 @@ public class LabManager : MonoBehaviour
                 testTrash.GetComponent<Outline>().enabled = false;
 
                 cartridge.GetComponent<BoxCollider>().enabled = true;
+                cartridge.GetComponent<BoxCollider>().isTrigger = true;
+
                 rightHand.GetComponent<BoxCollider>().enabled = false;
                 rightHand.GetComponent<SphereCollider>().enabled = true;
                 Outline[] outlines = cartridge.GetComponentsInChildren<Outline>();
@@ -366,7 +368,7 @@ public class LabManager : MonoBehaviour
                 glass = testTube.GetComponent<MeshRenderer>().material;
                 leftHand.GetComponent<Collider>().enabled = false;
                 ghostTube.transform.rotation = Quaternion.Euler(0, 0, 180);
-                ghostTube.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
+                ghostTube.transform.localScale = new Vector3(0.17f, 0.17f, 0.17f);
                 outlines = ghostTube.GetComponentsInChildren<Outline>();
                 foreach (Outline o in outlines)
                     o.enabled = true;
@@ -383,7 +385,7 @@ public class LabManager : MonoBehaviour
                 checkRotation(1);
                 break;
             case Steps.invertTube2:
-                ghostTube.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
+                ghostTube.transform.localScale = new Vector3(0.17f, 0.17f, 0.17f);
                 ghostTube.transform.rotation = Quaternion.Euler(0, 0, 0);
 
                 testText.text = instructions[24];
@@ -475,7 +477,6 @@ public class LabManager : MonoBehaviour
             case Steps.pickUpCap2:
                 cartridgeLid.GetComponent<Collider>().enabled = false;
                 cartridgeLid.GetComponent<Outline>().enabled = false;
-                cartridgePivot.transform.rotation = Quaternion.Euler(0, 180, 0);//close lid
 
                 tableCap.GetComponent<Outline>().enabled = true;
                 tableCap.GetComponent<Collider>().enabled = true;
@@ -594,6 +595,8 @@ public class LabManager : MonoBehaviour
                 testTrash.GetComponent<Collider>().enabled = true;
                 testTrash.GetComponent<Outline>().enabled = true;
 
+                testTrashLid.transform.localRotation = Quaternion.Euler(-90f, 0f, 0f);
+
                 rightHand.GetComponent<BoxCollider>().enabled = false;
 
                 geneXpertCartridgeOutline.GetComponent<Outline>().enabled = false;
@@ -612,6 +615,8 @@ public class LabManager : MonoBehaviour
             case Steps.closeGeneXpert2:
                 testTrash.GetComponent<Outline>().enabled = false;
                 testTrash.GetComponent<Collider>().enabled = false;
+
+                testTrashLid.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
 
                 geneXpertHandle.GetComponent<Collider>().enabled = true;
                 geneXpertHandle.GetComponent<Outline>().enabled = true;
@@ -725,7 +730,7 @@ public class LabManager : MonoBehaviour
         {
             screens[9].SetActive(false);
             screens[10].SetActive(true);
-
+            current = Steps.door;
         }
 
     }
@@ -890,6 +895,7 @@ public class LabManager : MonoBehaviour
 
             instructionSource.Stop();
             instructionSource.PlayOneShot(instructionAudio[30]);
+            cartridgePivot.transform.localRotation = Quaternion.Euler(0, 180, 0);//close lid
 
             current = Steps.pickUpCap2;
         }
@@ -1005,7 +1011,7 @@ public class LabManager : MonoBehaviour
             cartridge.transform.position = rightHand.transform.position;
             cartridge.transform.rotation = rightHand.transform.rotation;
             cartridge.transform.parent = rightHand.transform;
-            cartridge.transform.rotation = Quaternion.Euler(0, 90, 0);
+            cartridge.transform.localRotation = Quaternion.Euler(0, -90, 0);
             current = Steps.scanCartridge;
         }
         else if (current == Steps.pickUpCartridge2)
@@ -1013,7 +1019,7 @@ public class LabManager : MonoBehaviour
             cartridge.transform.position = rightHand.transform.position;
             cartridge.transform.rotation = rightHand.transform.rotation;
             cartridge.transform.parent = rightHand.transform;
-            cartridge.transform.rotation = Quaternion.Euler(0, 90, 0);
+            cartridge.transform.localRotation = Quaternion.Euler(0, -90, 0);
             current = Steps.insertCartridge;
         }
         else if (current == Steps.pickUpCartridge3)
@@ -1021,7 +1027,7 @@ public class LabManager : MonoBehaviour
             Renderer[] renderers = geneXpertCartridge.GetComponentsInChildren<Renderer>();
             foreach (Renderer r in renderers)
                 r.enabled = false;
-
+            cartridge.transform.localRotation = Quaternion.Euler(0, -90, 0);
             cartridge.SetActive(true);
             current = Steps.disposeCartridge;
         }

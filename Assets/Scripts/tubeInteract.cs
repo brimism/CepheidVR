@@ -22,7 +22,7 @@ public class tubeInteract : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.LogWarning("collided");
+        //Debug.LogWarning("collided");
         if (other.gameObject.tag == "Cap")
         {
             //Debug.Log("cap trigger");

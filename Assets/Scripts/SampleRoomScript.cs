@@ -44,26 +44,26 @@ public class SampleRoomScript : MonoBehaviour
 
     private string[] instructions = {//array of instructions given to the player
         "Please put on gloves.",//0
-        "Open the vacuum-sealed pack.",//1
+        "Open the vacuum-sealed pack and unwrap the swab.",//1
         "Unwrap the swab",//2
         "Pick up the swab with your right hand, at the middle of the shaft on the scoreline. Take care to not touch the tip of the swab to any surface.",//3
-        "Apply pressure with a finger to the outside of the nostril.",//4
-        "Rotate swab against the inside of the nostril for 3 seconds.",//5
-        "Swap hands.",//6
-        "Repeat: Insert the swab into the patient's nostril, no more than 1-1.5cm.",//7
-        "Repeat: Apply pressure with a finger to the outside of the nostril.",//8
-        "Repeat: Rotate swab against the inside of the nostril for 3 seconds.",//9
-        "Pick up the test tube.",//10
-        //"Remove the cap from the tube.",//
-        "Insert the swab into the transport medium, and break the swab against the side of the tube at the scoreline.",//11
-        "Dispose the swab.",//12
-        "Replace the cap on the tube and close tightly.",//13
-        "Please remove your gloves.",//14
-        "Bring your sample to the lab.",//15
+        "Insert the swab into the patient's nostril, no more than 1-1.5cm.",//4
+        "Apply pressure with a finger to the outside of the nostril.",//5
+        "Rotate swab against the inside of the nostril for 3 seconds.",//6
+        "Swap hands.",//7
+        "Repeat: Insert the swab into the patient's nostril, no more than 1-1.5cm.",//8
+        "Repeat: Apply pressure with a finger to the outside of the nostril.",//9
+        "Repeat: Rotate swab against the inside of the nostril for 3 seconds.",//10
+        "Pick up the test tube.",//11
+        "Insert the swab into the transport medium, and break the swab against the side of the tube at the scoreline.",//12
+        "Dispose the swab.",//13
+        "Replace the cap on the tube and close tightly.",//14
+        "Please remove your gloves.",//15
+        "Bring your sample to the lab.",//16
 
-        "Take a moment to read the patient's results.",//16
-        "Give the perscription to the patient.",//17
-        "End training experience?"//18
+        "Take a moment to read the patient's results.",//17
+        "Give the perscription to the patient.",//18
+        "End training experience?"//19
     };
     
     public AudioSource instructionSource;//audio source that plays instruction audio
