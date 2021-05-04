@@ -5420,11 +5420,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: 0
   sceneOS: {fileID: 11400000, guid: c68a707e308375649a68b33137bc942f, type: 2}
-  tableInstructions: {fileID: 1569679234}
-  tableText: {fileID: 145961489}
-  patientInstructions: {fileID: 1569679234}
-  patientText: {fileID: 145961489}
-  testText: {fileID: 145961489}
+  instructionsCanvas: {fileID: 1569679234}
+  instructionsText: {fileID: 145961489}
   confirmButton: {fileID: 1031848841}
   instructionSource: {fileID: 400131313}
   instructionAudio:

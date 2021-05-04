@@ -35,11 +35,8 @@ public class SampleRoomScript : MonoBehaviour
     [Header("NonDiegeticUI")]
 
     //transform of instruction canvas
-    public Canvas tableInstructions;//canvas of instructions over the counter in the sample taking room
-    public TextMeshProUGUI tableText;//text element of tableInstructions
-    public Canvas patientInstructions;//canvas of instructions next to the patient
-    public TextMeshProUGUI patientText;//text element of patientInstructions
-    public TextMeshProUGUI testText;//instructions in the testing room
+    public Canvas instructionsCanvas;//canvas of instructions over the counter in the sample taking room
+    public TextMeshProUGUI instructionsText;//text element of instructionsCanvas
     public GameObject confirmButton;//to teleport to next room
 
     private string[] instructions = {//array of instructions given to the player
@@ -216,8 +213,7 @@ public class SampleRoomScript : MonoBehaviour
                 rightHand.GetComponent<Collider>().enabled = true;
 
 
-                tableText.text = instructions[0];
-                patientText.text = instructions[0];
+                instructionsText.text = instructions[0];
 
                 break;
             case Steps.openPack://User has put on gloves, player must open the vacuum pack to move to next step
@@ -227,8 +223,7 @@ public class SampleRoomScript : MonoBehaviour
                 vacuumPack.GetComponent<Collider>().enabled = true;
                 vacuumPack.GetComponentInChildren<Outline>().enabled = true;
 
-                tableText.text = instructions[1];
-                patientText.text = instructions[1];
+                instructionsText.text = instructions[1];
 
                 break;
             case Steps.openSwab://need to unwrap the swab
@@ -237,8 +232,7 @@ public class SampleRoomScript : MonoBehaviour
                 swabPack.GetComponent<Collider>().enabled = true;
                 swabPack.GetComponentInChildren<Outline>().enabled = true;
 
-                tableText.text = instructions[2];
-                patientText.text = instructions[2];
+                instructionsText.text = instructions[2];
                 break;
             case Steps.pickUpSwab://pack now opened, player must pick up the swab with right hand
 
@@ -250,8 +244,7 @@ public class SampleRoomScript : MonoBehaviour
                 swabBottom.GetComponent<CapsuleCollider>().enabled = true;
                 swabBottom.GetComponent<Outline>().enabled = true;
 
-                tableText.text = instructions[3];
-                patientText.text = instructions[3];
+                instructionsText.text = instructions[3];
 
                 leftHand.GetComponent<Collider>().enabled = false;
                 break;
@@ -266,8 +259,7 @@ public class SampleRoomScript : MonoBehaviour
                 leftNostril.GetComponent<Outline>().enabled = true;
                 leftNostril.GetComponent<Collider>().enabled = true;
 
-                tableText.text = instructions[4];
-                patientText.text = instructions[4];
+                instructionsText.text = instructions[4];
 
                 rightHand.GetComponent<Collider>().enabled = false;
                 rightHandModel.GetComponent<MeshFilter>().mesh = swabHand;
@@ -289,8 +281,7 @@ public class SampleRoomScript : MonoBehaviour
                 leftPressure.GetComponent<MeshRenderer>().enabled = true;
                 leftPressure.GetComponent<Outline>().enabled = true;
 
-                tableText.text = instructions[5];
-                patientText.text = instructions[5];
+                instructionsText.text = instructions[5];
                 break;
             case Steps.rotateSwabLeft://player has applied pressure, must rotate swab in nostril for 3 seconds
                 rightHand.GetComponent<Outline>().enabled = true;
@@ -308,7 +299,6 @@ public class SampleRoomScript : MonoBehaviour
 
                 break;
             case Steps.swapSwab://player has taken the sample from the first nostril, must swap hands to swab the second nostril
-                patientText.text = instructions[6];
                 leftHand.GetComponent<Outline>().enabled = true;
                 leftHandModel.GetComponent<MeshFilter>().mesh = defaultHand;
 
@@ -318,6 +308,7 @@ public class SampleRoomScript : MonoBehaviour
                 swabBottom.GetComponent<CapsuleCollider>().enabled = true;
                 leftPressure.GetComponent<MeshRenderer>().enabled = false;
 
+                instructionsText.text = instructions[7];
                 break;
             case Steps.insertSwabRight://player has swapped hands, must insert swab into the second nostril
 
@@ -335,8 +326,7 @@ public class SampleRoomScript : MonoBehaviour
                 rightNostril.GetComponent<Outline>().enabled = true;
                 rightNostril.GetComponent<Collider>().enabled = true;
 
-                tableText.text = instructions[7];
-                patientText.text = instructions[7];
+                instructionsText.text = instructions[8];
                 break;
             case Steps.applyPressureRight://player has inserted swab, must apply pressure outside the nostril
 
@@ -355,8 +345,7 @@ public class SampleRoomScript : MonoBehaviour
                 rightPressure.GetComponent<MeshRenderer>().enabled = true;
                 rightPressure.GetComponent<Outline>().enabled = true;
 
-                tableText.text = instructions[8];
-                patientText.text = instructions[8];
+                instructionsText.text = instructions[9];
                 break;
             case Steps.rotateSwabRight://player has applied pressure, must rotate the swab for 3 seconds
                 leftHand.GetComponent<Outline>().enabled = true;
@@ -374,8 +363,7 @@ public class SampleRoomScript : MonoBehaviour
 
                 break;
             case Steps.pickupTube://player has successfully gathered the sample, must pick up the test tube
-                patientText.text = instructions[10];
-                tableText.text = instructions[10];
+                instructionsText.text = instructions[11];
 
                 swabTop.GetComponentInChildren<Outline>().enabled = false;
                 swabTop.GetComponent<CapsuleCollider>().enabled = false;
@@ -399,12 +387,10 @@ public class SampleRoomScript : MonoBehaviour
                 rightHand.GetComponent<Collider>().enabled = false;
                 rightHandModel.GetComponent<MeshFilter>().mesh = closedHand;
 
-                patientText.text = instructions[11];
-                tableText.text = instructions[11];
+                instructionsText.text = instructions[12];
                 break;
             case Steps.disposeSwab://player has broken the swab in the tube, must dispose of the swab
-                patientText.text = instructions[12];
-                tableText.text = instructions[12];
+                instructionsText.text = instructions[13];
                 testTube.GetComponent<CapsuleCollider>().enabled = false;
                 testTube.GetComponent<Outline>().enabled = false;
                 tubeSample.GetComponent<MeshRenderer>().enabled = true;//broken swab tip appears in the tube
@@ -435,8 +421,7 @@ public class SampleRoomScript : MonoBehaviour
                 leftHand.GetComponent<Collider>().enabled = true;
                 leftHandModel.GetComponent<MeshFilter>().mesh = defaultHand;
 
-                tableText.text = instructions[13];
-                patientText.text = instructions[13];
+                instructionsText.text = instructions[14];
                 break;
             case Steps.closeTube://player has picked up the cap, must close the tube
 
@@ -460,8 +445,7 @@ public class SampleRoomScript : MonoBehaviour
                 tubeCap.GetComponent<Collider>().enabled = false;
                 tubeCap.GetComponent<Outline>().enabled = false;
 
-                tableText.text = instructions[14];
-                patientText.text = instructions[14];
+                instructionsText.text = instructions[15];
                 break;
             case Steps.door:
                 trashCan.GetComponent<Collider>().enabled = false;
@@ -472,26 +456,22 @@ public class SampleRoomScript : MonoBehaviour
                 //doorKnob.GetComponent<Outline>().enabled = true;
                 confirmButton.SetActive(true);
 
-                patientText.text = instructions[15];
-                tableText.text = instructions[15];
+                instructionsText.text = instructions[16];
                 break;
 
             case Steps.readResults:
                 leftHand.GetComponent<Collider>().enabled = true;
                 rightHand.GetComponent<Collider>().enabled = true;
-                patientText.text = instructions[16];
-                tableText.text = instructions[16];
+                instructionsText.text = instructions[17];
                 StartCoroutine(WaitToRead());
                 break;
             case Steps.giveResults:
                 //activate collider to give patient stuff, then switch to end
                 giveToPatientCollider.GetComponent<Collider>().enabled = true;
-                patientText.text = instructions[17];
-                tableText.text = instructions[17];
+                instructionsText.text = instructions[18];
                 break;
             case Steps.end:
-                patientText.text = instructions[18];
-                tableText.text = instructions[18];
+                instructionsText.text = instructions[19];
                 break;
 
             default:
@@ -735,11 +715,11 @@ public class SampleRoomScript : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         if (current == Steps.rotateSwabLeft)
         {
-            patientText.text = "Rotate swab against the inside of the nostril for 3 seconds.";
+            instructionsText.text = "Rotate swab against the inside of the nostril for 3 seconds.";
             yield return new WaitForSeconds(3f);
-            patientText.text = "Rotate swab against the inside of the nostril for 2 seconds.";
+            instructionsText.text = "Rotate swab against the inside of the nostril for 2 seconds.";
             yield return new WaitForSeconds(1f);
-            patientText.text = "Rotate swab against the inside of the nostril for 1 seconds.";
+            instructionsText.text = "Rotate swab against the inside of the nostril for 1 seconds.";
             yield return new WaitForSeconds(1f);
 
             instructionSource.Stop();
@@ -749,11 +729,11 @@ public class SampleRoomScript : MonoBehaviour
         }
         else if (current == Steps.rotateSwabRight)
         {
-            patientText.text = "Repeat: Rotate swab against the inside of the nostril for 3 seconds.";
+            instructionsText.text = "Repeat: Rotate swab against the inside of the nostril for 3 seconds.";
             yield return new WaitForSeconds(3f);
-            patientText.text = "Repeat: Rotate swab against the inside of the nostril for 2 seconds.";
+            instructionsText.text = "Repeat: Rotate swab against the inside of the nostril for 2 seconds.";
             yield return new WaitForSeconds(1f);
-            patientText.text = "Repeat: Rotate swab against the inside of the nostril for 1 seconds.";
+            instructionsText.text = "Repeat: Rotate swab against the inside of the nostril for 1 seconds.";
             yield return new WaitForSeconds(1f);
 
             instructionSource.Stop();
