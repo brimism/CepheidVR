@@ -38,13 +38,13 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44947976, g: 0.49955308, b: 0.57568985, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -52,7 +52,7 @@ LightmapSettings:
     m_AlbedoBoost: 1
     m_EnvironmentLightingMode: 0
     m_EnableBakedLightmaps: 1
-    m_EnableRealtimeLightmaps: 1
+    m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
     serializedVersion: 12
     m_Resolution: 2
@@ -15954,6 +15954,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 3629005435355877848, guid: d0c99caaa98f91a43bdd1c41bc8aaa53,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: bf94d7f8037d6fd46a6c97f2d562812c, type: 2}
     - target: {fileID: 3631631493965983035, guid: d0c99caaa98f91a43bdd1c41bc8aaa53,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -16089,6 +16094,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3635981109733080404, guid: d0c99caaa98f91a43bdd1c41bc8aaa53,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: bf94d7f8037d6fd46a6c97f2d562812c, type: 2}
     - target: {fileID: 3635981109744622860, guid: d0c99caaa98f91a43bdd1c41bc8aaa53,
         type: 3}
       propertyPath: m_StaticEditorFlags
