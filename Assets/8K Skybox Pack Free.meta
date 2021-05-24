@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/8K Skybox Pack Free.meta
 guid: 44828855dbcccb34fac3a18a8462f897
+=======
+guid: 4fc917be824bb5e42a70e059fc398b74
+>>>>>>> ff0a769e43ff19c190a453496c4074f6badf41df:Assets/3D Models/materials/patient_materials/old.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
