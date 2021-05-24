@@ -35,6 +35,7 @@ public class SampleRoomScript : MonoBehaviour
     [Header("NonDiegeticUI")]
 
     //transform of instruction canvas
+    public UIFollow instructionsKeeper;//the parent of the canvas that controls movement
     public Canvas instructionsCanvas;//canvas of instructions over the counter in the sample taking room
     public TextMeshProUGUI instructionsText;//text element of instructionsCanvas
     public GameObject confirmButton;//to teleport to next room
@@ -65,6 +66,9 @@ public class SampleRoomScript : MonoBehaviour
     
     public AudioSource instructionSource;//audio source that plays instruction audio
     public AudioClip[] instructionAudio;//array of instruction audio clips 
+
+    public Transform tableCanvasTransform;//where the instructions are anchored during steps involving things on the table
+    public Transform patientCanvasTransform;//where the instructions are anchored during steps involving the patient
 
     public enum instructionText
     {
@@ -177,6 +181,7 @@ public class SampleRoomScript : MonoBehaviour
             //swab patient
             case 0:
                 current = Steps.start; //assign current step to first
+                instructionsKeeper.target = tableCanvasTransform;
                 currentInstruction = instructionText.start;
                 instructionSource.PlayDelayed(1.5f);
                 break;
@@ -532,6 +537,7 @@ public class SampleRoomScript : MonoBehaviour
             instructionSource.PlayOneShot(instructionAudio[3]);
 
             characterAnimator.SetTrigger("Transition");
+            instructionsKeeper.target = patientCanvasTransform;
             current = Steps.insertSwabLeft;
         }
         else if (current == Steps.swapSwab)
@@ -739,6 +745,7 @@ public class SampleRoomScript : MonoBehaviour
             instructionSource.Stop();
             instructionSource.PlayOneShot(instructionAudio[10]);
 
+            instructionsKeeper.target = tableCanvasTransform;
             current = Steps.pickupTube;
         }
 
