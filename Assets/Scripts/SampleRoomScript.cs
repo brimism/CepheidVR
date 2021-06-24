@@ -465,6 +465,7 @@ public class SampleRoomScript : MonoBehaviour
                 break;
 
             case Steps.readResults:
+
                 leftHand.GetComponent<Collider>().enabled = true;
                 rightHand.GetComponent<Collider>().enabled = true;
                 instructionsText.text = instructions[17];
@@ -795,6 +796,7 @@ public class SampleRoomScript : MonoBehaviour
     IEnumerator WaitToRead()
     {
         yield return new WaitForSeconds(3f);
+        instructionsKeeper.target = patientCanvasTransform;
         current = Steps.giveResults;
     }
 }

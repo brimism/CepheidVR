@@ -875,7 +875,10 @@ PrefabInstance:
       propertyPath: m_BoundingSphereOverride.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5896113893064544251, guid: 13f9863aeb89287439c421f60b520821, type: 3}
+    - {fileID: 5896113893064544248, guid: 13f9863aeb89287439c421f60b520821, type: 3}
+    - {fileID: 5896113893064544247, guid: 13f9863aeb89287439c421f60b520821, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 13f9863aeb89287439c421f60b520821, type: 3}
 --- !u!1 &148434630 stripped
 GameObject:
