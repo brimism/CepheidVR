@@ -82,6 +82,10 @@ public class Interaction : MonoBehaviour
         {
             this.gameObject.SendMessageUpwards("pickUpPipette");
         }
+        else if (other.tag == "tubeRack")
+        {
+            this.gameObject.SendMessageUpwards("tubeRack", this.gameObject.name);
+        }
         else if (other.tag == "Cartridge")
         {
             this.gameObject.SendMessageUpwards("pickUpCartridge");

@@ -26,6 +26,7 @@ TagManager:
   - GeneXpertHandle
   - GeneXpertCartridge
   - Patient
+  - tubeRack
   layers:
   - Default
   - TransparentFX

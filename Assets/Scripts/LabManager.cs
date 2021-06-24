@@ -18,9 +18,9 @@ public class LabManager : MonoBehaviour
     {
         labGloves,//putting on gloves
         holdTubeLeft, welcomeScreen, startNewTest, scanTube, confirmSpecimen,//starting the assay and confirming the specimen
-        pickUpCartridge, scanCartridge, confirmCartridge, selectAssay, confirmAssay,//confirming the specimen and selecting the correct assay
+        putDownTube, pickUpCartridge, scanCartridge, confirmCartridge, selectAssay, confirmAssay,//confirming the specimen and selecting the correct assay
         putDownCartridge,
-        invertTube1, invertTube2, openCartridge, openTube, pickUpPipette, collectSample, depositSample,//preparing the sample for placement in the cartridge
+        pickUpTube, invertTube1, invertTube2, openCartridge, openTube, pickUpPipette, collectSample, depositSample,//preparing the sample for placement in the cartridge
         disposePipette, closeCartridge, pickUpCap2, closeTube2, disposeTube,//preparing the cartridge
         pickUpCartridge2, openGeneXpert, insertCartridge, closeGeneXpert,//starting the test
         startTest, openGeneXpert2, pickUpCartridge3, disposeCartridge, closeGeneXpert2, openResults, chooseResult,
@@ -54,7 +54,6 @@ public class LabManager : MonoBehaviour
         "Repeat: Apply pressure with a finger to the outside of the nostril.",//8
         "Repeat: Rotate swab against the inside of the nostril for 3 seconds.",//9
         "Pick up the test tube.",//10
-        //"Remove the cap from the tube.",//
         "Insert the swab into the transport medium, and break the swab against the side of the tube at the scoreline.",//11
         "Dispose the swab.",//12
         "Replace the cap on the tube and close tightly.",//13
@@ -66,11 +65,11 @@ public class LabManager : MonoBehaviour
         "Start the GeneXpert testing procedure.",//17
         "Scan the test tube specimen.",//18
         "Confirm the test tube specimen.",//19
-        "Scan the Xpert cartridge.",//20
+        "Place the test tube down and scan the Xpert cartridge.",//20
         "Confirm the cartridge number.",//21
         "Select assay.",//22
         "Place the cartridge on the table and open it.",//23
-        "Invert the test tube 5 times.",//24
+        "Pick up the test tube and invert it 5 times.",//24
         "Hold the tube in your left hand and open it.",//25
         "Pick up the pipette and take the sample from the tube.",//26
         "Deposit the sample into the prepared chamber of the cartridge.",//27
@@ -122,12 +121,15 @@ public class LabManager : MonoBehaviour
 
     public GameObject cartridgeScan;//the box attached to the GeneXpert that represents the barcode scanning area
 
+    public GameObject tubeRackOutline;//the cylinder in the tube rack that indicates where to place the test tube
+    public GameObject rackTube;//the dummy tube on the rack for when the player puts down the test tube, disabled on start
+
     public Transform tableCartridgeTransform;//transform that cartridge snaps to when the player puts down the cartridge
     public GameObject cartridgeCube; //outlined cube that the player aims for when putting down the cartridge
 
     public GameObject geneXpertHandle;//the handle of the genexpert door
     public GameObject geneXpertCartridge;//the cartridge that is present inside the GeneXpert. Is visible/invisible as is necessary to sell the illusion that you are placing/taking out the cartridge in the machine
-    public GameObject geneXpertCartridgeOutline;//the cube attached to the geneXpertCartridge, used for outlines and collision detection;
+    public GameObject geneXpertCartridgeOutline;//the cube attached to the geneXpertCartridge, used for outlines and collision detection
 
     public GameObject ghostTube;//the test tube indicator that shows the user how to invert the test tube
     public GameObject tableCap;//fake test tube cap on the table fo rwhen the player "opens" the test tube to take the sample
@@ -183,7 +185,7 @@ public class LabManager : MonoBehaviour
     public Material blue;
     public Material glass;
     public Material pipetteColor;
-
+ 
     [Header("BooleansAndMisc")]
     public int gloved; //how many times the hands have been gloved or ungloved in the current state
     private bool fingerPoint;//bool used for pick up tube helper function, determines whether the hand not holding the tube is the default hand or the pointer hand
@@ -304,22 +306,35 @@ public class LabManager : MonoBehaviour
                 headerText.text = headers[3];
                 testText.text = instructions[19];
                 break;
+            case Steps.putDownTube:
+                testTube.GetComponent<BoxCollider>().isTrigger = false;
+
+                tubeRackOutline.GetComponent<Outline>().enabled = true;
+                tubeRackOutline.GetComponent<Collider>().enabled = true;
+
+                                screens[2].GetComponentInChildren<TextMeshProUGUI>().text = "Please scan the barcode on the cartridge using the scanner on the side of the machine.";
+                headerText.text = headers[4];
+                testText.text = instructions[20];
+                break;
             case Steps.pickUpCartridge:
-                testTrash.GetComponent<Collider>().enabled = false;
-                testTrash.GetComponent<Outline>().enabled = false;
+                rackTube.SetActive(true);
+                testTube.SetActive(false);
+                tubeCap.SetActive(false);
+
+                rightHandModel.GetComponent<MeshFilter>().mesh = defaultHand;
+                rightHand.GetComponent<BoxCollider>().enabled = true;
+
+                tubeRackOutline.GetComponent<Outline>().enabled = false;
+                tubeRackOutline.GetComponent<Collider>().enabled = false;
 
                 cartridge.GetComponent<BoxCollider>().enabled = true;
                 cartridge.GetComponent<BoxCollider>().isTrigger = true;
 
-                rightHand.GetComponent<BoxCollider>().enabled = false;
+                rightHand.GetComponent<BoxCollider>().enabled = true;
                 rightHand.GetComponent<SphereCollider>().enabled = true;
                 Outline[] outlines = cartridge.GetComponentsInChildren<Outline>();
                 foreach (Outline o in outlines)
                     o.enabled = true;
-
-                screens[2].GetComponentInChildren<TextMeshProUGUI>().text = "Please scan the barcode on the cartridge using the scanner on the side of the machine.";
-                headerText.text = headers[4];
-                testText.text = instructions[20];
                 break;
             case Steps.scanCartridge:
                 rightHand.GetComponent<Collider>().enabled = false;
@@ -362,11 +377,27 @@ public class LabManager : MonoBehaviour
 
                 testText.text = instructions[23];
                 break;
-            case Steps.invertTube1:
-                cartridgeCube.SetActive(false);
+            case Steps.pickUpTube:
 
                 glass = testTube.GetComponent<MeshRenderer>().material;
                 leftHand.GetComponent<Collider>().enabled = false;
+
+                tubeRackOutline.GetComponent<Outline>().enabled = true;
+                tubeRackOutline.GetComponent<Collider>().enabled = true;
+                
+                cartridgeLid.GetComponent<Collider>().enabled = false;
+                cartridgeLid.GetComponent<Outline>().enabled = false;
+                cartridgePivot.transform.rotation = Quaternion.Euler(90, 0, 0);
+
+                testText.text = instructions[24];
+                break;
+            case Steps.invertTube1:
+                tubeRackOutline.GetComponent<Outline>().enabled = false;
+                tubeRackOutline.GetComponent<Collider>().enabled = false;
+                rackTube.SetActive(false);
+                testTube.SetActive(true);
+                tubeCap.SetActive(true);
+
                 ghostTube.transform.rotation = Quaternion.Euler(0, 0, 180);
                 ghostTube.transform.localScale = new Vector3(0.17f, 0.17f, 0.17f);
                 outlines = ghostTube.GetComponentsInChildren<Outline>();
@@ -376,12 +407,6 @@ public class LabManager : MonoBehaviour
                 renderers = ghostTube.GetComponentsInChildren<Renderer>();
                 foreach (Renderer r in renderers)
                     r.enabled = true;
-
-                cartridgeLid.GetComponent<Collider>().enabled = false;
-                cartridgeLid.GetComponent<Outline>().enabled = false;
-                cartridgePivot.transform.rotation = Quaternion.Euler(90, 0, 0);
-
-                testText.text = instructions[24];
                 checkRotation(1);
                 break;
             case Steps.invertTube2:
@@ -679,7 +704,7 @@ public class LabManager : MonoBehaviour
             instructionSource.Stop();
             instructionSource.PlayOneShot(instructionAudio[20]);
 
-            current = Steps.pickUpCartridge;
+            current = Steps.putDownTube;
         }
         else if (current == Steps.confirmCartridge)
         {
@@ -768,6 +793,19 @@ public class LabManager : MonoBehaviour
                     d.Show();
                 fingerPoint = true;
             }
+        }
+    }
+
+    public void tubeRack(string handtag)
+    {
+        if(current == Steps.putDownTube)
+        {
+            current = Steps.pickUpCartridge;
+        }
+        else if(current == Steps.pickUpTube)
+        {
+            pickUpTube(handtag);
+            current = Steps.invertTube1;
         }
     }
 
@@ -874,6 +912,8 @@ public class LabManager : MonoBehaviour
         {
             cartridge.transform.parent = null;
             cartridge.transform.SetPositionAndRotation(tableCartridgeTransform.position, tableCartridgeTransform.rotation);
+            rightHandModel.GetComponent<MeshFilter>().mesh = defaultHand;
+            leftHandModel.GetComponent<MeshFilter>().mesh = defaultHand;
             current = Steps.openCartridge;
         }
     }
@@ -887,7 +927,7 @@ public class LabManager : MonoBehaviour
             instructionSource.Stop();
             instructionSource.PlayOneShot(instructionAudio[24]);
 
-            current = Steps.invertTube1;
+            current = Steps.pickUpTube;
         }
         else if (current == Steps.closeCartridge)
         {
