@@ -44,7 +44,7 @@ public class SampleRoomScript : MonoBehaviour
         "Please put on gloves.",//0
         "Open the vacuum-sealed pack and unwrap the swab.",//1
         "Unwrap the swab",//2
-        "Pick up the swab with your right hand, at the middle of the shaft on the scoreline. Take care to not touch the tip of the swab to any surface.",//3
+        "Pick up the swab with your right hand, at the middle of the shaft on the scoreline.",//13 //Take care to not touch the tip of the swab to any surface.",//3
         "Insert the swab into the patient's nostril, no more than 1-1.5cm.",//4
         "Apply pressure with a finger to the outside of the nostril.",//5
         "Rotate swab against the inside of the nostril for 3 seconds.",//6
@@ -53,7 +53,7 @@ public class SampleRoomScript : MonoBehaviour
         "Repeat: Apply pressure with a finger to the outside of the nostril.",//9
         "Repeat: Rotate swab against the inside of the nostril for 3 seconds.",//10
         "Pick up the test tube.",//11
-        "Insert the swab into the transport medium, and break the swab against the side of the tube at the scoreline.",//12
+        "Insert swab into the tube. Break swab against the side of the tube at the scoreline.", //12   //"Insert the swab into the transport medium, and break the swab against the side of the tube at the scoreline.",//12
         "Dispose the swab.",//13
         "Replace the cap on the tube and close tightly.",//14
         "Please remove your gloves.",//15
