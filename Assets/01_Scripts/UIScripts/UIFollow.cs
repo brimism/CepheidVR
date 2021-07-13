@@ -37,9 +37,7 @@ public class UIFollow : MonoBehaviour
         // Rotate the camera every frame so it keeps looking at the target
         this.transform.LookAt(cameraToLookAt.transform);
 
-        //keep existing "y" rotation and set "x" and "z" rotation from intitalRotation
-        //this.transform.localRotation = Quaternion.Euler(new Vector3(this.transform.localRotation.x, -1f*this.transform.localRotation.y, this.transform.localRotation.z));
-
+        //gesture recognition to move UI
         if (moveLeft && !follow)
         {
             float distance = Vector3.Distance(newPos, transform.position);
@@ -67,24 +65,17 @@ public class UIFollow : MonoBehaviour
             float distance = Vector3.Distance(target.position, transform.position);
             if (distance > maxDistance)
             {
-                //Debug.Log("moving");
                 Vector3 desiredPosition = target.position;
                 Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
                 transform.position = smoothedPosition;
-                //transform.LookAt(cameraToLookAt.gameObject.transform);
-               /* newRotation = cameraToLookAt.transform.rotation;
-                newRotation.z = 0;
-                transform.rotation = newRotation;*/
+                
             }
             if (transform.position.y < target.position.y)
             {
                 Vector3 desiredPosition = new Vector3(transform.position.x, target.position.y + 1, transform.position.z);
                 Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
                 transform.position = smoothedPosition;
-                //transform.LookAt(cameraToLookAt.gameObject.transform);
-               /* newRotation = cameraToLookAt.transform.rotation;
-                newRotation.z = 0;
-                transform.rotation = newRotation;*/
+                
             }
         }
 

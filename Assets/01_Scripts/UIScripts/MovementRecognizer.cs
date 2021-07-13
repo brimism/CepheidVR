@@ -50,7 +50,6 @@ public class MovementRecognizer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //isPressed = inputProcessor.rightHandTrigger;
         InputHelpers.IsPressed(InputDevices.GetDeviceAtXRNode(inputSource), inputButton, out bool isPressed, inputThreshold);
 
         Debug.Log(isPressed);
@@ -110,8 +109,6 @@ public class MovementRecognizer : MonoBehaviour
         else
         {
             Result result = PointCloudRecognizer.Classify(newGesture, trainingSet.ToArray());
-            //Result result = PointCloudRecognizer.Classify(newGesture, realSet);
-            //Debug.Log(result.GestureClass + result.Score);
             
             if(result.Score > recognitionThreshold)
             {

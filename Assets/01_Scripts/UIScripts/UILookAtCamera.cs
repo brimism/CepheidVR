@@ -33,31 +33,7 @@ public class UILookAtCamera : MonoBehaviour
     
     void FixedUpdate()
     {
-        //if (!thumPressed && (inputProcessor.leftHandButtonX || inputProcessor.rightHandButtonA))
-        //{
-        //    thumPressed = true;
-        //    follow = !follow;
-        //    //lerp left
-        //    if (inputProcessor.leftHandButtonX)
-        //    {
-        //        moveLeft = true;
-        //        newPos = new Vector3(target.position.x - 3f, target.position.y + 1f, target.position.z);
-        //    }
-        //    //else lerp right
-        //    else if (inputProcessor.rightHandButtonA)
-        //    {
-        //        moveRight = true;
-        //        newPos = new Vector3(target.position.x + 3f, target.position.y + 1f, target.position.z);
-
-        //    }
-        //}
-        //else if (!inputProcessor.leftHandButtonX && !inputProcessor.rightHandButtonA)
-        //{
-        //    thumPressed = false;
-        //    moveLeft = false;
-        //    moveRight = false;
-        //}
-
+        //gesture recognition for moving UI
         if(moveLeft && !follow)
         {
             float distance = Vector3.Distance(newPos, transform.position);
@@ -79,17 +55,15 @@ public class UILookAtCamera : MonoBehaviour
             }
         }
 
-
+        //move UI
         if (follow)
         {
             float distance = Vector3.Distance(target.position, transform.position);
             if (distance > maxDistance)
             {
-                //Debug.Log("moving");
                 Vector3 desiredPosition = target.position;
                 Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
                 transform.position = smoothedPosition;
-                //transform.LookAt(cameraToLookAt.gameObject.transform);
                 var newRotation = cameraToLookAt.transform.rotation;
                 newRotation.z = 0;
                 transform.rotation = newRotation;
@@ -99,7 +73,6 @@ public class UILookAtCamera : MonoBehaviour
                 Vector3 desiredPosition = new Vector3(transform.position.x, target.position.y + 1, transform.position.z) ;
                 Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
                 transform.position = smoothedPosition;
-                //transform.LookAt(cameraToLookAt.gameObject.transform);
                 var newRotation = cameraToLookAt.transform.rotation;
                 newRotation.z = 0;
                 transform.rotation = newRotation;
