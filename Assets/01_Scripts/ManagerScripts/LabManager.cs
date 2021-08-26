@@ -387,7 +387,7 @@ public class LabManager : MonoBehaviour
                 
                 cartridgeLid.GetComponent<Collider>().enabled = false;
                 cartridgeLid.GetComponent<Outline>().enabled = false;
-                cartridgePivot.transform.rotation = Quaternion.Euler(90, 0, 0);
+                cartridgePivot.transform.rotation = Quaternion.Euler(-90, 0, 0);
 
                 testText.text = instructions[24];
                 break;
@@ -935,7 +935,7 @@ public class LabManager : MonoBehaviour
 
             instructionSource.Stop();
             instructionSource.PlayOneShot(instructionAudio[30]);
-            cartridgePivot.transform.localRotation = Quaternion.Euler(0, 180, 0);//close lid
+            cartridgePivot.transform.localRotation = Quaternion.Euler(0, 0, 0);//close lid
 
             current = Steps.pickUpCap2;
         }
@@ -1180,7 +1180,7 @@ public class LabManager : MonoBehaviour
         panel.CrossFadeAlpha(1.0f, 2.5f, true); //fade canvas to black
         yield return new WaitForSeconds(2.5f);//delay
         sceneSO.examRoomState++;
-        SceneManager.LoadScene("Rig_NewSampleRoom");
+        SceneManager.LoadScene("02_ExamRoom");
         //pc.transform.SetPositionAndRotation(testRoomTransform.position, testRoomTransform.rotation);
         yield return new WaitForSeconds(1.5f);//delay
 
