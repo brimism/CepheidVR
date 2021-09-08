@@ -137,9 +137,11 @@ public class IntroManager : MonoBehaviour
     }
 
     public void teachSwipeAway()
+    //temporarily skipping the swiping instructions, as the gesture control has been unreliable and anchoring the InstructionsKeeper to a single point is preferable
     {
         if (currentStep == Steps.lookAtUI)
-            currentStep = Steps.teachSwipeAway;
+            // currentStep = Steps.teachSwipeAway; 
+            currentStep = Steps.showObj;
     }
 
     public void teachSwipeBack()
@@ -185,7 +187,7 @@ public class IntroManager : MonoBehaviour
         {
             blackPanel.SetTrigger("FadeOut");
             yield return new WaitForSeconds(1.1f);
-            SceneManager.LoadScene("Lobby");
+            SceneManager.LoadScene("01_Lobby");
         }
     }
 
