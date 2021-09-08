@@ -101,6 +101,7 @@ public class IntroManager : MonoBehaviour
             case Steps.showObj:
                 tutorialText.text = tutorial[5];
                 assistText.text = uiText[3];
+                confirmButton.SetActive(false);
                 testObj.SetActive(true);
                 testObj.GetComponent<Outline>().enabled = true;
                 break;
