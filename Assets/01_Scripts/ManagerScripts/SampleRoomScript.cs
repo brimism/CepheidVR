@@ -777,7 +777,7 @@ public class SampleRoomScript : MonoBehaviour
         if (sceneOS.examRoomState == 0)
             SceneManager.LoadScene(3);
         else if (sceneOS.examRoomState == 1)
-            SceneManager.LoadScene("IntroScene");
+            SceneManager.LoadScene("00_IntroScene");
         //instructionSource.Stop();
         //instructionSource.PlayOneShot(instructionAudio[16]);
         //current = Steps.labGloves;//"please put on gloves" (again)
